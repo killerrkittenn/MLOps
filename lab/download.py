@@ -12,7 +12,7 @@ def download_data():
 def clear_data(path2df):
     df = pd.read_csv(path2df)
 
-    cat_columns = ['Make', 'Model', 'Style', 'Fuel_type', 'Transmission']
+    car_columns = ['Make', 'Model', 'Style', 'Fuel_type', 'Transmission']
     num_columns = ['Year', 'Distance', 'Engine_capacity(cm3)', 'Price(euro)']
 
     question_dist = df[(df.Year < 2021) & (df.Distance < 1100)]
@@ -44,10 +44,10 @@ def clear_data(path2df):
 
     df = df.reset_index(drop=True)
     ordinal = OrdinalEncoder()
-    ordinal.fit(df[cat_columns])
-    Ordinal_encoded = ordinal.transform(df[cat_columns])
-    df_ordinal = pd.DataFrame(Ordinal_encoded, columns=cat_columns)
-    df[cat_columns] = df_ordinal[cat_columns]
+    ordinal.fit(df[car_columns])
+    Ordinal_encoded = ordinal.transform(df[car_columns])
+    df_ordinal = pd.DataFrame(Ordinal_encoded, columns=car_columns)
+    df[car_columns] = df_ordinal[car_columns]
     df.to_csv('df_clear.csv')
     return True
 
